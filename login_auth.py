@@ -19,6 +19,9 @@ app.config['SECRET_KEY'] = "create-secret-key"
 db = SQLAlchemy(app)
 
 class Users(db.Model):
+    '''
+    Users class creates Users table in database
+    '''
     __tablename__ = "Users"
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100))
@@ -54,11 +57,6 @@ def register():
         return "Success"
         
     return render_template('register.html')
-
-@app.route('/index', methods = ['GET', 'POST'])
-def index():
-    persons = Users.query.all()
-    return render_template('index.html', persons=persons)
    
 if __name__ == '__main__':
     app.run()
