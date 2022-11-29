@@ -1,5 +1,5 @@
 """
-Author: Matt Wolf
+Author: Matt Wolf, Brady Shuck
 Course: CMSC495
 Purpose: This program is a series of API calls to OpenWeatherAPI for Location and Weather Data.
 """
@@ -16,8 +16,9 @@ this function converts zipcode and country code to lat-lon coordinates to build
 def get_location():
     location_api_url = 'https://api.openweathermap.org/geo/1.0/zip?zip='
     zip_code = input("Enter ZIP Code: ")
-    country_code = input("Enter Country abbreviation(US, CAN, FRA, etc.): ")
-    build_location = zip_code + ("&") + country_code
+    country_code = input("Enter Country abbreviation(US, CA, FR etc.): ")
+    build_location = zip_code + (",") + country_code
+    print(build_location)
     build_geolocation_url = location_api_url + build_location + API_SECRET
     print(build_geolocation_url)
     geolocation_response = requests.get(build_geolocation_url)
@@ -27,7 +28,25 @@ def get_location():
     coordinates = "lat=" + str(latitude_cords) + "&" + "lon=" + str(longitude_cords)
     return coordinates
 
-
+"""
+This function converts a city name into lat-lon coordinates to build
+"""
+def get_location_city():
+    location_api_url = 'http://api.openweathermap.org/geo/1.0/direct?q='
+    city_code = input("Enter City Name: ")
+    country_code = input("Enter Country abbreviation(US, CAN, FRA, etc.): ")
+    build_location = city_code + (",") + country_code
+    print(build_location)
+    build_geolocation_url = location_api_url + build_location + API_SECRET
+    print(build_geolocation_url)
+    geolocation_response = requests.get(build_geolocation_url)
+    geolocation_data = geolocation_response.json()
+    for entry in geolocation_data:
+        latitude_cords = format(entry["lat"])
+        longitude_cords = format(entry["lon"])
+    print(latitude_cords,longitude_cords)
+    coordinates = "lat=" + str(latitude_cords) + "&" + "lon=" + str(longitude_cords)
+    return coordinates
 """
 this function calls the OpenWeatherAPI for current forecast data
 """
@@ -75,4 +94,3 @@ def get_monthly_forecast():
     print(monthly_weather_response)
     print(monthly_weather_data)
     return monthly_weather_data
-
