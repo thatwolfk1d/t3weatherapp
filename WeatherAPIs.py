@@ -16,7 +16,7 @@ this function converts zipcode and country code to lat-lon coordinates to build
 def get_location():
     location_api_url = 'https://api.openweathermap.org/geo/1.0/zip?zip='
     zip_code = input("Enter ZIP Code: ")
-    country_code = input("Enter Country abbreviation(US, CA, FRA etc.): ")
+    country_code = input("Enter Country abbreviation(US, CA, FR etc.): ")
     build_location = zip_code + (",") + country_code
     print(build_location)
     build_geolocation_url = location_api_url + build_location + API_SECRET
