@@ -5,7 +5,6 @@ Purpose: This program is a series of API calls to OpenWeatherAPI for Location an
 """
 
 import requests
-from typing import List
 
 API_SECRET = '&appid=c498ab6233adc1ec28ededc44418df6a'
 
