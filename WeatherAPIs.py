@@ -77,7 +77,13 @@ def get_current_forecast(x, y):
     current_weather_data = current_weather_response.json()
     mylist = []
     for key in current_weather_data:
-        if type(current_weather_data[key]) == dict:
+        if key == "weather":
+            for item in current_weather_data[key]:
+                mydict = {}
+                mydict["Header"] = key
+                mydict.update(item)
+                mylist.append(mydict)
+        elif type(current_weather_data[key]) == dict:
             mydict = {}
             mydict["Header"]=key
             mydict.update(current_weather_data[key])
@@ -140,4 +146,3 @@ def get_monthly_forecast(x, y):
     monthly_weather_response = requests.get(build_monthly_api_url)
     monthly_weather_data = monthly_weather_response.json()
     return monthly_weather_data
-
