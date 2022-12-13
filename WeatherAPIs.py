@@ -72,7 +72,8 @@ this function calls the OpenWeatherAPI for current forecast data
 
 def get_current_forecast(x, y):
     current_api_url = 'https://pro.openweathermap.org/data/2.5/weather?'
-    build_current_api_url = current_api_url + get_location(x, y) + API_SECRET
+    build_current_api_url = current_api_url + get_location(x, y) + API_SECRET+"&units=imperial"
+    print(build_current_api_url)
     current_weather_response = requests.get(build_current_api_url)
     current_weather_data = current_weather_response.json()
     mylist = []
@@ -103,7 +104,7 @@ this function calls the OpenWeatherAPI for hourly forecast data
 def get_hourly_forecast(x, y):
     hourly_api_url = 'https://pro.openweathermap.org/data/2.5/forecast/hourly?'
     build_hourly_api_url = hourly_api_url + get_location(x, y) + API_SECRET
-    hourly_weather_response = requests.get(build_hourly_api_url)
+    hourly_weather_response =   requests.get(build_hourly_api_url)
     hourly_weather_data = hourly_weather_response.json()
     mylist = []
     for key in hourly_weather_data:
